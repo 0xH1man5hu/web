@@ -1,0 +1,31 @@
+nikto -h 192.168.56.102
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP          192.168.56.102
++ Target Hostname    192.168.56.102
++ Target Port        80
++ Start Time         2020-10-31 105957 (GMT-4)
+---------------------------------------------------------------------------
++ Server Apache2.2.8 (Ubuntu) PHP5.2.4-2ubuntu5.10 with Suhosin-Patch
++ Server may leak inodes via ETags, header found with file , inode 67575, size 45, mtime Wed Mar 17 100825 2010
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ PHP5.2.4-2ubuntu5.10 appears to be outdated (current is at least 7.2.12). PHP 5.6.33, 7.0.27, 7.1.13, 7.2.1 may also current release for each branch.
++ Apache2.2.8 appears to be outdated (current is at least Apache2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ Uncommon header 'tcn' found, with contents list
++ Apache mod_negotiation is enabled with MultiViews, which allows attackers to easily brute force file names. See httpwww.wisec.itsectou.phpid=4698ebdc59d15. The following alternatives for 'index' were found index.html
++ Allowed HTTP Methods GET, HEAD, POST, OPTIONS, TRACE 
++ OSVDB-877 HTTP TRACE method is active, suggesting the host is vulnerable to XST
++ Retrieved x-powered-by header PHP5.2.4-2ubuntu5.10
++ phpinfo.php Output from the phpinfo() function was found.
++ OSVDB-3233 phpinfo.php PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ OSVDB-3268 icons Directory indexing found.
++ OSVDB-3233 iconsREADME Apache default file found.
++ Cookie PHPSESSID created without the httponly flag
++ tikiwikitiki-graph_formula.php Output from the phpinfo() function was found.
++ OSVDB-40478 tikiwikitiki-graph_formula.phpw=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=httpcirt.netrfiinc.txt TikiWiki contains a vulnerability which allows remote attackers to execute arbitrary PHP code.
++ 8725 requests 1 error(s) and 18 item(s) reported on remote host
++ End Time           2020-10-31 110053 (GMT-4) (56 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested

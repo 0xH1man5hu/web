@@ -1,0 +1,5 @@
+nmap -sC -sV  192.168.56.100
+
+Host is up (0.0016s latency).
+All 1000 scanned ports on 192.168.56.100 are filtered
+MAC Address: 08:00:27:35:DC:08 (Oracle VirtualBox virtual NIC)

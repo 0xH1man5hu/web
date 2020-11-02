@@ -1,0 +1,67 @@
+nmap -sC -sV 192.168.56.102
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-31 06:25 EDT
+Stats: 0:00:49 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 91.67% done; ETC: 06:26 (0:00:03 remaining)
+Stats: 0:01:58 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 98.62% done; ETC: 06:27 (0:00:00 remaining)
+Stats: 0:02:35 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 99.75% done; ETC: 06:27 (0:00:00 remaining)
+Nmap scan report for 192.168.56.102
+Host is up (0.00068s latency).
+Not shown: 988 closed ports
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         ProFTPD 1.3.1
+22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)
+|_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)
+23/tcp   open  telnet      Linux telnetd
+25/tcp   open  smtp        Postfix smtpd
+|_smtp-commands: metasploitable.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+|_ssl-date: 2020-10-31T10:00:58+00:00; -27m26s from scanner time.
+| sslv2: 
+|   SSLv2 supported
+|   ciphers: 
+|     SSL2_DES_192_EDE3_CBC_WITH_MD5
+|     SSL2_RC4_128_EXPORT40_WITH_MD5
+|     SSL2_RC2_128_CBC_EXPORT40_WITH_MD5
+|     SSL2_DES_64_CBC_WITH_MD5
+|     SSL2_RC4_128_WITH_MD5
+|_    SSL2_RC2_128_CBC_WITH_MD5
+53/tcp   open  domain      ISC BIND 9.4.2
+| dns-nsid: 
+|_  bind.version: 9.4.2
+80/tcp   open  http        Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch)
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Apache/2.2.8 (Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch
+|_http-title: Site doesn't have a title (text/html).
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+3306/tcp open  mysql       MySQL 5.0.51a-3ubuntu5
+| mysql-info: 
+|   Protocol: 10
+|   Version: 5.0.51a-3ubuntu5
+|   Thread ID: 16
+|   Capabilities flags: 43564
+|   Some Capabilities: SwitchToSSLAfterHandshake, SupportsCompression, Support41Auth, SupportsTransactions, LongColumnFlag, Speaks41ProtocolNew, ConnectWithDatabase
+|   Status: Autocommit
+|_  Salt: 8|)SGIxAx\BvN_sD<=\:
+5432/tcp open  postgresql  PostgreSQL DB 8.3.0 - 8.3.7
+|_ssl-date: 2020-10-31T10:00:58+00:00; -27m26s from scanner time.
+8009/tcp open  ajp13?
+8180/tcp open  http        Apache Tomcat/Coyote JSP engine 1.1
+MAC Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)
+Service Info: Host:  metasploitable.localdomain; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: -27m26s, deviation: 0s, median: -27m26s
+|_ms-sql-info: ERROR: Script execution failed (use -d to debug)
+|_nbstat: NetBIOS name: METASPLOITABLE, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+|_smb-os-discovery: ERROR: Script execution failed (use -d to debug)
+|_smb-security-mode: ERROR: Script execution failed (use -d to debug)
+|_smb2-time: Protocol negotiation failed (SMB2)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 200.29 seconds

