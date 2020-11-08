@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>MrRobot</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+</head>
+<body bgcolor="#f1f1f1">
+	<div class="sidebar">
+	<a class="active" href="https://mrhsharma.github.io/web/">Homepage</a>
+	<marquee behavior="alternate"><h2>MrRobot</h2>
+	</marquee></a>
+	<a href="#a0">Machine Introduction</a>
+  <a href="#1">Reconnaissance/Scanning</a>
+  <a href="#3">Enumeration</a>
+  <a href="#4">Exploitation</a>
+  <a href="#5">Synopsis</a>
+</div><div id=lw1>
+	<p>
+
+<h2 id="a0" style="text-decoration: underline;">Description</h2>
+<Br>Based on the show, Mr. Robot.
+
+<Br>This VM has three keys hidden in different locations. 
+Our goal is to find all three.<Br> Each key is progressively difficult to find.
+<Br>
+<Br>The VM isn't too difficult. <Br>There isn't any advanced exploitation or reverse engineering. <Br>The level is considered beginner-intermediate.
+		
+	<h2 id="1" style="text-decoration: underline;">Reconnaissance/Scanning</h2>
+	<br>	Getting started with namp
+	<br><code class="language-plaintext highlighter-rouge">#nmap -sV -sT -p- 192.168.56.104</code><br><br> 	   Nmap scan report for 192.168.56.104
+<br>	Host is up (0.0044s latency).
+<br>	Not shown: 65532 filtered ports
+<br>	PORT    STATE  SERVICE  VERSION
+<br>	22/tcp  closed ssh
+<br>	80/tcp  open   http     Apache httpd
+<br>	443/tcp open   ssl/http Apache httpd
+<br>	MAC Address: 08:00:27:98:12:21 (Oracle VirtualBox virtual NIC)
+<br>
+So Only port 80 is open so we can only do http sort of thing.
+	<br><br>	I first use <code class="language-plaintext highlighter-rouge">#recon-ng</code> tool and using module interesting file I found 1 file
+	<br>	phpinfo()
+	<br>	<a href="sshots\s2.jpg"><img src="sshots\s2.jpg" alt="intfile" width="600" height="400"></a>
+	<code class="language-plaintext highlighter-rouge">#nikto</code>
+	nikto -h 192.168.56.104
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.56.104
++ Target Hostname:    192.168.56.104
++ Target Port:        80
++ Start Time:         2020-11-04 14:00:48 (GMT-5)
+---------------------------------------------------------------------------
++ Server: Apache
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Retrieved x-powered-by header: PHP/5.5.29
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Uncommon header 'tcn' found, with contents: list
++ Apache mod_negotiation is enabled with MultiViews, which allows attackers to easily brute force file names. See http://www.wisec.it/sectou.php?id=4698ebdc59d15. The following alternatives for 'index' were found: index.html, index.php
++ OSVDB-3092: /admin/: This might be interesting...
++ Uncommon header 'link' found, with contents: <http://192.168.56.104/?p=23>; rel=shortlink
++ /wp-links-opml.php: This WordPress script reveals the installed version.
++ OSVDB-3092: /license.txt: License file found may identify site software.
++ /admin/index.html: Admin login page/section found.
++ Cookie wordpress_test_cookie created without the httponly flag
++ /wp-login/: Admin login page/section found.
++ /wordpress: A Wordpress installation was found.
++ /wp-admin/wp-login.php: Wordpress login found
++ /wordpresswp-admin/wp-login.php: Wordpress login found
++ /blog/wp-login.php: Wordpress login found
++ /wp-login.php: Wordpress login found
++ /wordpresswp-login.php: Wordpress login found
++ 7915 requests: 0 error(s) and 18 item(s) reported on remote host
++ End Time:           2020-11-04 14:09:52 (GMT-5) (544 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+
+[recon-ng][hs][interesting_files] > options set SOURCE 192.168.56.104
+SOURCE => 192.168.56.104
+[recon-ng][hs][interesting_files] > run
+[*] http://192.168.56.104:80/robots.txt => 200. 'robots.txt' found!
+[*] http://192.168.56.104:80/sitemap.xml => 200. 'sitemap.xml' found but unverified.
+[*] http://192.168.56.104:80/sitemap.xml.gz => 200. 'sitemap.xml.gz' found but unverified.
+[*] http://192.168.56.104:80/crossdomain.xml => 404
+[*] http://192.168.56.104:80/phpinfo.php => 404
+[*] http://192.168.56.104:80/test.php => 404
+[*] http://192.168.56.104:80/elmah.axd => 404
+[*] http://192.168.56.104:80/server-status => 404
+[*] http://192.168.56.104:80/jmx-console/ => 404
+[*] http://192.168.56.104:80/admin-console/ => 404
+[*] http://192.168.56.104:80/web-console/ => 404
+[*] 1 interesting files found.
+[*] Files downloaded to '/root/.recon-ng/workspaces/hs/'
+[recon-ng][hs][interesting_files] > 
+
+root@kali:~/.recon-ng/workspaces/hs# ls
+config.dat  data.db  http_192.168.56.104_robots.txt
+root@kali:~/.recon-ng/workspaces/hs# cat http_192.168.56.104_robots.txt 
+User-agent: *
+fsocity.dic
+key-1-of-3.txt
+
+
+	<h2 id="3" style="text-decoration: underline;">Enumeration</h2>
+	
+ 	python -c "import pty;pty.spawn('/bin/bash')"
+822c73956184f694993bede3eb39f959
+key-2-of-3.txt	
+
+firstboot_done	key-3-of-3.txt
+# cat k*
+cat k*
+key-3-of-3.txt	
+04787ddef27c3dee1ee161b21670b4e4
+
+'${PASSWD}'
+
+	<br>
+	<br>	<a href="sshots\s4.jpg"><img src="sshots\s4.jpg" alt="nikto" width="900" height="400"></a>
+		
+	<br>	Then try to open the ip in browser as indicated in nikto
+	<br>	<a href="sshots\s5.png"><img src="sshots\s5.png" alt="" width="900" height="400"></a>
+	<br>	<a href="sshots\s5a.png"><img src="sshots\s5a.png" alt="" width="900" height="400"></a>
+	<a href="sshots\http192 168 56 102.png"><img src="sshots\s5b.png" alt="" width="800" height="400"></a>
+	<br>	<a href="sshots\s5c.png"><img src="sshots\s5c.png" alt="" width="900" height="400"></a>
+	<br>	<a href="sshots\phpinfo().png" alt="More" >phpfile</a>
+	<br>	<a href="sshots\Index of icons.png" alt="More" >/icons ie a directory</a><br>
+	<br>
+
+	<h2 id="4" style="text-decoration: underline;">Exploitation</h2>	
+	
+	<br>	Then i switch to metasploit
+	<br>	and scan by nmap then i got many port with running services
+	<br>	<a href="sshots\s3.png"><img src="sshots\s3.png" alt="nmap" width="500" height="500"></a>
+	<br>	
+	<br>	Then I search the exploits in database ie in searchsploit
+	<br>	And do the tools ie Scanner, Exploit from port 21 ie On ProFTPD, OpenSSH, telnet, and all. 
+	<br>	Some of them are
+	<br>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/ftp/proftpd_modcopy_exec</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/ftp/proftpd_133c_backdoor </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#scanner/ssh/ssh_login  </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#scanner/ssh/ssh_login</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_upload_exec </code>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_unserialize_exec</code> 
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_jhot_exec </code>
+	<br>
+	<br>	And the one which successfully run are
+	<br>	1. Samba smbd 3.X - 4.X
+	<br>	ie onmost famous smb port ie port 139
+	<br>	we got access to machine
+	<br>		
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/multi/samba/usermap_script</code> 
+	<br>	<img src="sshots\s6.png" alt="SMB" width="500" height="500"><br>
+			<img src="sshots\s6b.png" alt="SMB" width="500" height="500"><br>
+			<img src="sshots\s6c.png" alt="SMB" width="500" height="500"><br>
+	<br>	2. Apache server 
+	<br>	Exploiting wikitiki php arbitrary code vulnerability
+	<br>	Getting reverse shell on tcp port.
+	<br>
+	<br>	<code class="language-plaintext highlighter-rouge">#exploit/unix/webapp/tikiwiki_graph_formula_exec</code>
+	<br>
+	<br>	<img src="sshots\s8.png" alt="Apache" ><br><br>
+	More details on connection<br>
+	<a href="sshots\s8b.png" alt="More" >Session information</a><br>
+	<a href="sshots\s8c.png" alt="More" >Core commands</a><br>
+	<a href="sshots\s8d.png" alt="More" >system info</a><br>
+	<a href="sshots\s8e.png" alt="More" >wikitiki default dir</a><br>
+	<a href="sshots\s8f.png" alt="More" >directory files</a><br>
+	<a href="sshots\s8h.png" alt="More" >root user data</a><br>
+	<br></p> Interesting files or data found
+	<ul>
+		<br><li>passwd file in etc/<br><a href="sshots\s7.png">
+		<img border="0" alt="passwd" src="sshots\s7.png" width="100" height="100"></a></li>
+		<br><li>Root directory<br><a href="sshots\s9.png">
+		<img border="0" alt="root" src="sshots\s9.png" width="100" height="100"></a></li>
+		<br><li>admin= msadmin and list of vulnerabilitys...Lol..<br><a href="sshots\s10.png">
+		<img border="0" alt="vuln" src="sshots\s10.png" width="100" height="100"></a></li>
+		<br><li> uid of machine<br><a href="sshots\s11.png">
+		<img border="0" alt="" src="sshots\s11.png" width="100" height="100"></a></li>
+		<br><li>Most Imp file robot.txt<br><a href="sshots\s12.png">
+		<img border="0" alt="" src="sshots\s12.png" width="100" height="100"></a></li>
+		<br><li>Session port and other information<br><a href="sshots\s13.png">
+		<img border="0" alt="" src="sshots\s13.png" width="100" height="100"></a></li>
+
+	</ul>
+	
+	<h2 id="5" style="text-decoration: underline;">Synopsis/Reporting</h2>
+	<h3>POC</h3>
+	<p>
+		This machine details
+	<br>	Host is up (0.00068s latency).
+	<br>	OS: Unix
+	<br>	IP: 192.168.56.102
+	<br>	Mac Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)
+<br>
+	<br>	Port:
+	<br>	12 open ports
+	<br>	988 closed ports
+		<br>Details of open ports
+		<div>	
+			<table style="background-color:#00FF00, width:500px">
+		<tr><td>21/tcp </td><td>  open </td><td> ftp        </td><td> ProFTPD 1.3.1</td></tr>
+		<tr><td>22/tcp </td><td>  open </td><td> ssh        </td><td> OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)</td></tr>
+   		<tr><td>23/tcp </td><td>  open </td><td> telnet     </td><td> Linux telnetd</td></tr>
+		<tr><td>25/tcp </td><td>  open </td><td> smtp       </td><td> Postfix smtpd</td></tr>
+		<tr><td>53/tcp </td><td>  open </td><td> domain     </td><td> ISC BIND 9.4.2</td></tr>
+		<tr><td>80/tcp </td><td>  open </td><td> http       </td><td> Apache httpd 2.2.8 ((Ubuntu) PHP/5.2.4-2ubuntu5.10 with Suhosin-Patch)</td></tr>
+		<tr><td>139/tcp</td><td>  open </td><td> netbios-ssn</td><td> Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</td></tr>
+		<tr><td>445/tcp</td><td>  open </td><td> netbios-ssn</td><td> Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</td></tr>
+		<tr><td>3306/tcp</td><td> open </td><td> mysql      </td><td> MySQL 5.0.51a-3ubuntu5</td></tr>
+		<tr><td>5432/tcp</td><td> open </td><td> postgresql </td><td> PostgreSQL DB 8.3.0 - 8.3.7</td></tr>
+		<tr><td>8009/tcp</td><td> open </td><td> ajp13?   </td><td></td></tr>
+		<tr><td>8180/tcp</td><td> open </td><td> http       </td><td> Apache Tomcat/Coyote JSP engine 1.1</td></tr>
+		</table><table style="background-color:#00FF00, width:500px">
+		<tr><td>MAC Address: 08:00:27:94:37:C9 (Oracle VirtualBox virtual NIC)</td></tr>
+		<tr><td>Service Info: host:  metasploitable.localdomain;  OSs: Unix,  Linux; CPE:  cpe:  /o:linux:linux_kernel</td></tr> 
+	</table>
+	</div>
+	<br>	From these smb services ie Samba smbd 3.X - 4.X (workgroup: WORKGROUP) 
+	<br>	on port 139,445 are highly vulnerable.
+	<br>	Apache Server is also highly vulnerable
+	<br>	MySql database is vulnerable.
+	<br>	telnet, ssh password are compromised by enumeration or bruteforcing.
+	<br>	ProFTPD running on ftp ie port 21 is vulnerable too.  
+	
+		<ol>
+			<li><a href="nmap -sC -sV 192.168.56.txt">nmap network</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.1.txt">nmap -sC -sV 192.168.56.1</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.100.txt">nmap -sC -sV 192.168.56.100</a></li>
+			<li><a href="nmap -sC -sV 192.168.56.102.txt">nmap -sC -sV 192.168.56.102</a></li>
+			<li>nikto reports<br>
+			<a href="report_1.html">report_192.168.56.1</a><br>
+			<a href="report_100.html">report_192.168.56.100</a><br>
+			<a href="report_102.html">report_192.168.56.102</a><br>
+			<li><a href="nikto -h 192.168.56.102.txt">nikto -h 192.168.56.102</a></li>
+			
+			</li>
+		</ol>
+		</p></div>
+</body>
+</html>
