@@ -1,0 +1,14 @@
+
+
+
+root@kali:~# nmap -sO  192.168.56.103
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-11-07 13:25 EST
+mass_dns: warning: Unable to determine any DNS servers. Reverse DNS is disabled. Try using --system-dns or specify valid servers with --dns-servers
+Nmap scan report for 192.168.56.103
+Host is up (0.0023s latency).
+Not shown: 252 open|filtered protocols
+PROTOCOL STATE  SERVICE
+1        open   icmp
+6        open   tcp
+17       open   udp
+53       closed swipe

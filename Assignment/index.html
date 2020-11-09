@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment</title>
+<link rel="stylesheet" type="text/css" href="sty.css">
+<style type="text/css">
+	p {
+  color: green;
+}
+#lw1{
+  padding-left: 135px;
+}
+code.highlighter-rouge {
+    font-family: Courier New, Courier, monospace;
+    font-size: 2;
+    background-color: lightgreen;
+    color: black;
+    padding: 1px 3px;
+    border-radius: 2px;
+</style>
+</head>
+<body bgcolor="#f1f1f1">
+	<div class="sidebar">
+	<a class="active" href="https://mrhsharma.github.io/web/">Home</a>
+	<a href="#a0">#1</a>
+  <a href="#a1">#2</a>
+  <a href="#a2">#3</a>
+</div><div id=lw1>
+<!-- ============================================================================================= -->
+<!-- ============================================================================================= -->
+
+<hr><hr>
+<h2 id="a0" style="text-decoration: underline;">#1: Mr Robot </h2>
+
+<!-- ============================================================================================= -->
+
+1. Find out the password for user robot.
+<br>Sol
+<p> Since the username is elliot and password is ER28-0652 so we can login to wordpress.
+First we obtain shell using phython reverse shell code to run editor 404.php so we edit it and then got reverse shell on netcat port 443</p>
+<img src="mrobot/s1.png">
+<img src="mrobot/s2.png">
+<img src="mrobot/s2b.png">
+<img src="mrobot/s3.png">
+<p>Then going to directory robot we find our key2 and also password hash for user robot in file password.raw-md5 which shows hash type is md5 and user robot</p>
+<img src="mrobot/s4.png">
+<p>
+Then we simple use john to crack hash and got simple password.<br> 
+Password : abcdefghijklmnopqrstuvwxyz</p><p>We can simple login as user robot by using username and password<br>But we can't use su commmand then I upgrade shell to tty ie<br>
+	<code class="language-plaintext highlighter-rouge">python -c "import pty;pty.spawn('/bin/bash')"</code>
+<br><br><img src="mrobot/s4a.png"></p><p>
+And then I succesfully login to robot.</p>
+<img src="mrobot/s4b.png"><br>
+<br>
+
+<!-- ============================================================================================= -->
+
+2. Perform recon-ng on mr robot in order to get various interesting files. 
+<br>Sol
+<p>
+	Using module <code class="language-plaintext highlighter-rouge">[interesting_files]</code>I got one interesting file</p><p>
+		<img src="mrobot/s5a.png"><br>
+<a href="mrobot/robots.txt">File: robots.txt</a><br>
+<img src="mrobot/s5b.png">
+<br>Which further lead us to <a href="mrobot/fsocity.dic">fsocity.dic</a> and <a href="mrobot/s6.png">key-1-of-3.txt</a>  <br>
+</p>
+	
+<!-- ============================================================================================= -->
+
+<br>3. Find out the mac address of device  where port 443 is open.
+<br>Sol
+<p> nmap shows us the mac address of device.<br>
+	<code class="language-plaintext highlighter-rouge">#nmap -sV -sT -p- 192.168.56.104</code></p><p>
+	<img src="mrobot/s7.png">
+	<br>
+	ie mac address<br>
+	<code class="language-plaintext highlighter-rouge">08:00:27:98:12:21</code>	
+</p>
+
+<!-- ============================================================================================= -->
+
+<br>4. Find out the versions of the server of mr robot where port number 80 and 443 is open.
+<br>Sol<br>
+<p>
+Firstly by nmap result we find that apache server is running on these port.<br>Then I run <code class="language-plaintext highlighter-rouge">nikto -h 192.168.56.104</code> and try to find more information.</p>
+<img src="mrobot/s8.png"> <p> 
+Got wordpress running with Php version 5.5.29
+At last use a tool and got <br>version<b>4.3.1<b><br>
+<img src="mrobot/s9.png">
+</p>
+
+<a href="https://mrhsharma.github.io/web/MrRobot">Full Walkthrough</a>
+
+<hr><hr>
+<!-- =================================================================================================
+================================================================================================= -->
+<h2 id="a1" style="text-decoration: underline;">#2: Metasploitable 2</h2>
+
+<!-- ============================================================================================= -->
+
+1. Perform the ctf for metasploitable 2
+<br>Sol<br>
+<p><a href="https://mrhsharma.github.io/web/ctf%202/ctf2.html">Full Walkthrough</a></p>
+
+<!-- ============================================================================================= -->
+
+<br>2. Find out various vulnerability and their status through nmap. 
+<br>Sol<br>
+<p>
+	<a href="metspt2/nmap_vul.txt">vulnerability</a><br>
+	<code class="language-plaintext highlighter-rouge">PORT    SERVICE     VERSION</code><br>
+	<code class="language-plaintext highlighter-rouge">21	   ftp         vsftpd 2.3.4</code><br>
+	<code class="language-plaintext highlighter-rouge">22     ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)</code><br>
+	<code class="language-plaintext highlighter-rouge">23     telnet      Linux telnetd</code><br>
+	<code class="language-plaintext highlighter-rouge">25     smtp        Postfix smtpd</code><br>
+	<code class="language-plaintext highlighter-rouge">53     domain      ISC BIND 9.4.2</code><br>
+	<code class="language-plaintext highlighter-rouge">80     http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)</code><br>
+	<code class="language-plaintext highlighter-rouge">111    rpcbind     2 (RPC #100000)</code><br>
+	<code class="language-plaintext highlighter-rouge">139    netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</code><br>
+	<code class="language-plaintext highlighter-rouge">445    netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</code><br>
+	<code class="language-plaintext highlighter-rouge">512    exec        netkit-rsh rexecd</code><br>
+	<code class="language-plaintext highlighter-rouge">513    login       OpenBSD or Solaris rlogind</code><br>
+	<code class="language-plaintext highlighter-rouge">514    shell       Netkit rshd</code><br>
+	<code class="language-plaintext highlighter-rouge">1099   java-rmi    GNU Classpath grmiregistry</code><br>
+	<code class="language-plaintext highlighter-rouge">1524   bindshell   Metasploitable root shell</code><br>
+	<code class="language-plaintext highlighter-rouge">2049   nfs         2-4 (RPC #100003)</code><br>
+	<code class="language-plaintext highlighter-rouge">2121   ftp         ProFTPD 1.3.1</code><br>
+	<code class="language-plaintext highlighter-rouge">3306   mysql       MySQL 5.0.51a-3ubuntu5</code><br>
+	<code class="language-plaintext highlighter-rouge">5432   postgresql  PostgreSQL DB 8.3.0 - 8.3.7</code><br>
+	<code class="language-plaintext highlighter-rouge">5900   vnc         VNC (protocol 3.3)</code><br>
+	<code class="language-plaintext highlighter-rouge">6000   X11         (access denied)</code><br>
+	<code class="language-plaintext highlighter-rouge">6667   irc         UnrealIRCd</code><br>
+	<code class="language-plaintext highlighter-rouge">8009   ajp13       Apache Jserv (Protocol v1.3)</code><br>
+	<code class="language-plaintext highlighter-rouge">8180   http        Apache Tomcat/Coyote JSP engine 1.1</code><br>
+</p>
+
+<!-- ============================================================================================= -->
+
+<br>3. Perform any 5 different scanning of  metasploitable-2 through nmap <br>(every scan result must have some vulnerability).
+<br>Sol<br>
+	<p>
+		<ol>
+			<li><a href="metspt2/nmap1.txt">nmap -sS 192.168.56.103</a></li>
+			<li><a href="metspt2/nmap2.txt">nmap -sV 192.168.56.103</a></li>
+			<li><a href="metspt2/nmap4.txt">nmap -sT 192.168.56.103</a></li>
+			<li><a href="metspt2/nmap3.txt">nmap -sC 192.168.56.103</a></li>
+			<li><a href="metspt2/nmap5.txt">nmap -sO 192.168.56.103</a></li>
+			
+		</ol>
+	</p>
+
+<!-- ============================================================================================= -->
+
+<br>4. Find out the following vulnerabilities and exploit it.
+<ol>
+	<p>
+<li>	 Port 25 (SMTP)</li><a href="metspt2/"></a>
+<li>  Port 139 (NetBios)</li><a href="metspt2/usermap.png">exploit(multi/samba/usermap_script) </a>
+<li> Port 1099 (Remote Method Invocation)</li><a href="metspt2/"></a>
+<li>  Port 2121 (Pro-FTPD)</li><a href="metspt2/"></a>
+<li>   Port 3306 (MySQL)</li><a href="metspt2/"></a>
+<li>  Port 6667 & 6697 (UNREALIRCD)</li><a href="metspt2/unreal.png">exploit(unix/irc/unreal_ircd_3281_backdoor) </a>
+<li> Port 8180 (Apache Tomcat)</li><a href="metspt2/"></a>
+
+	</p>
+</ol>
+
+<!-- ============================================================================================= -->
+
+<br>5. Perform Medium Level Cross-site scripting and SQL Injection on DVWA.
+<br>Sol<br>
+<p></p>
+<br>
+<!-- =================================================================================================
+================================================================================================= -->
+<hr><hr><br>
+<h2 id="a2" style="text-decoration: underline;">#3</h2>
+<!-- ============================================================================================= -->
+1. What are the components which Network Security covers and list down the differenct entities envolving in and network infrastructure.
+<br>Sol<br>
+
+	<h3 style="color: red">Components of Network security are:</h3>
+<p><u>Firewall Security</u><br>Firewall configuration,reporting and updates. It requires continual updatesof the latest security patches.
+	<u>IPS</u><br>IPS system catches and drops any threatening traffic before it causes damage. IPS systems work automatically to scan network traffic and prevent known threats from entering the network.</p><p>
+	<u>IDS</u><br>IDS systems scan networks for threats, but require human interaction to read the scan results and determine a plan of action to resolve any identified threats.</p><p>
+<u>Network Access Control (NAC)</u><br>It regulates the user and their access regularly. Ensuring your networks are secure and not accessible to unauthorized users.</p><p>
+<u>Content filtering.</u><br>By blocking the spams and advertisement along with malicious content from the internet.</p><p>
+<u>Email and spam protection</u><br>Spammers have become sophisticated and now used advanced phishing schemes to collect personal and confidential material from your employee</p>
+<h3 style="color: red">Differnt  entities envolving in and network infrastructure are:</h3>
+	<u>Firewall:</u><br>It filters all the informations coming through our network LAN or internet connections and block materials that are flagged malicious or harmfull in the list firewall.</p><p>
+</p>
+<!-- ============================================================================================= -->
+<br>2. Please talk about some of the attack and defense mechanisms for any network including devices, hardware and softwares.
+<br>Sol<br>
+	<h3 style="color: red">Common attacks  on network:</h3>
+	<p><u>Unauthorized access</u><br>
+	It refers accessing a network without permission of asset ownner or account holder. Comman causes of unauthorized access attacks are human error, weak passwords, lacking protection against social engineering.</p>
+<p>
+<u>Distributed Denial of Service (DDoS) attacks:</u><br> 
+DDoS is kind on DoS attack which filles the bandwidth and server start to loose packets which results in stopping of network services, or server down.<br>
+it occur at the network level, eg by sending huge volumes of SYN/ACC packets which can down a server,<br> or at the application level,eg by performing complex SQL queries that bring a database to its knees.
+</p><p>
+<u>Man in the middle attacks:</u><br>If communication protocols are not secured then attackers find a way to trace and sniff packets, and can steal data that is being transmitted, obtain user credentials and hijack their sessions. <br>This is mostly done on Free wifi places.
+</p><p>
+<u>Code and SQL injection attacks:</u><br>Many websites accept user inputs and directly run them without filtering, changing. This led into sql injection ie database is breached by a line of code. Similar in xss which happens due to weak link in url. Lastly websites fail to validate and sanitize those inputs. The code is executed on the server and database is compromised.
+</p><p>
+<u>Insider threats:</u><br>A network is especially vulnerable to malicious insiders, who already have privileged access to organizational systems. So that affect the most as from inside more harm can be done.
+	</p>
+<h3 style="color: red">Techniques for protection of network.:</h3>
+<p><u>	Distributed networks:</u><br> A basic part of network security is dividing a network into zones based on security requirements. This can be done using subnets within the same network, or by creating VLAN, each of which behaves like a complete separate network.<br> Also as per need we can increase security levels and amount on perticular subnet. 
+</p>
+<p><u>	Firewalls:</u><br>Place a firewall at every junction of network zone, not just at the network edge. If you can’t deploy full-fledged firewalls everywhere, use the built-in firewall functionality of your switches and routers. Deploy anti-DDoS devices or cloud services at the network edge. 
+</p>
+<p><u>Network Address Translation:</u><br>NAT let us translate internal IP addresses into addresses accessible on public networks. This provides an extra layer of security, because any inbound or outgoing traffic has to go through a NAT device, and there are fewer IP addresses which makes it difficult for attackers to understand which host they are connecting to.
+</p>
+<p><u>Regular Monitor Network Traffic:</u><br>Ensure you have complete visibility of incoming, outgoing and internal network traffic, with the ability to automatically detect threats, and understand their context and impact.
+</p>
+<p><u>Use Advanced Technology:</u><br>No network protection measures are 100% successful, and attackers will eventually succeed in penetrating network. So, using updated technology will help in securing the network.
+</p><br>
+<!-- ============================================================================================= -->
+<br>3. We have done Stapler1 in our lectures, please make VAPT report properly for finding anonymous ftp service with its version name and also enumerate all the users along with the password for one of them. Next you have to dump the passwd file from /etc/ directory.
+<br>Sol<br>
+<p><a href="q3/VAPT_Stapler.docx">VAPT Report on stapler</a></p>
+<p><a href="https://mrhsharma.github.io/web/Stapler">Full Walkthrough</a></p>
+
+<!-- ============================================================================================= -->
+
+<br>4. Formulate an attack scenario using snort in one machine, configure it on your Network Interface port, so that you can monitor the incomming traffic and outgoing traffic from a target machine. Also perform the same scenario for second scenario where you have enable rules with regards to anonymous browsing, for any web browser and Man in the middle Attack scenarios.(choose the rules wisely).
+<br>Sol<br>
+<p>
+	<img src="q3/s2.jpeg" width=90% height=90%>
+	<img src="q3/s1.jpeg" width=90% height=90%>
+	<img src="q3/s3.jpeg" width=90% height=90%>
+	<img src="q3/s4.png" width=90% height=90%>
+	<img src="q3/s5.jpeg" width=90% height=90%>
+</p>
+
+<!-- ============================================================================================= -->
+
+<br>5. Perform a open source intelligence on www.tesla.com and try to find as many details as you can including its name servers, ip net blocks, location, any person associated with it, mail servers etc. Also i want at least one email id for any of the tesla's employee.
+<br>Sol<br>
+<p></p>
+
+<!-- ============================================================================================= -->
+
+<br>6. Write down the rule to generate alert for tcp protocol with destination port more than 6000.
+<br>Sol<br>
+<p>alert tcp any any -> 192.168.1.0/24 6001:</p>
+
+<!-- ============================================================================================= -->
+
+<br>7. Write down the rule to generate alert for tcp protocol without source port 443 and 80.
+<br>Sol<br>
+<p>alert tcp any any -> 192.168.1.0/24 ![80,443]</p>
+
+<!-- ============================================================================================= -->
+
+<br>8. Write down the difference between IDS and IPS system.
+<br>Sol<br>
+<p>IDS systems require human interaction. IDS systems scan networks for threats, but require human interaction to read the scan results and determine a plan of action to resolve any identified threats. This work could require a full time position if the network generates a lot of traffic. IDS systems make an excellent forensics tool for security researchers investigating a network after a security incident.
+</p><p>
+IPS systems work on autopilot. An IPS system catches and drops any threatening traffic before it causes damage. IPS systems work automatically to scan network traffic and prevent known threats from entering the network.
+</p><p>
+The main difference between them is that IDS is a monitoring system, while IPS is a control system.IDS doesn’t alter the network packets in any way, whereas IPS prevents the packet from delivery based on the contents of the packet, much like how a firewall prevents traffic by IP address.
+</p><p>
+IDS requires a human or another system to look at the results and determine what actions to take next, which could be a full time job depending on the amount of network traffic generated each day. IDS makes a better post-mortem forensics tool for the CSIRT to use as part of their security incident investigations.
+</p><p>
+The purpose of the IPS, on the other hand, is to catch dangerous packets and drop them before they reach their target. It’s more passive than an IDS, simply requiring that the database gets regularly updated with new threat data.
+</p>	
+
+<!-- ============================================================================================= -->
+	</div>
+</body>
+</html>
