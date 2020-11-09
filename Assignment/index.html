@@ -38,10 +38,10 @@ code.highlighter-rouge {
 <br>Sol
 <p> Since the username is elliot and password is ER28-0652 so we can login to wordpress.
 First we obtain shell using phython reverse shell code to run editor 404.php so we edit it and then got reverse shell on netcat port 443</p>
-<img src="mrobot/s1.png">
-<img src="mrobot/s2.png">
-<img src="mrobot/s2b.png">
-<img src="mrobot/s3.png">
+<img src="mrobot/s1.png" width=90% height=90%>
+<img src="mrobot/s2.png" width=90% height=90%>
+<img src="mrobot/s2b.png" >
+<img src="mrobot/s3.png" width=90% height=90%>
 <p>Then going to directory robot we find our key2 and also password hash for user robot in file password.raw-md5 which shows hash type is md5 and user robot</p>
 <img src="mrobot/s4.png">
 <p>
@@ -62,7 +62,7 @@ And then I succesfully login to robot.</p>
 		<img src="mrobot/s5a.png"><br>
 <a href="mrobot/robots.txt">File: robots.txt</a><br>
 <img src="mrobot/s5b.png">
-<br>Which further lead us to <a href="mrobot/fsocity.dic">fsocity.dic</a> and <a href="mrobot/s6.png">key-1-of-3.txt</a>  <br>
+<br>Which further lead us to <a href="mrobot/fsocity.dic">fsocity.dic</a> and <a href="mrobot/key-1-of-3.txt">key-1-of-3.txt</a>  <br>
 </p>
 	
 <!-- ============================================================================================= -->
@@ -85,7 +85,7 @@ And then I succesfully login to robot.</p>
 Firstly by nmap result we find that apache server is running on these port.<br>Then I run <code class="language-plaintext highlighter-rouge">nikto -h 192.168.56.104</code> and try to find more information.</p>
 <img src="mrobot/s8.png"> <p> 
 Got wordpress running with Php version 5.5.29
-At last use a tool and got <br>version<b>4.3.1</b><br>
+At last use a tool and got <br>version<br><b>4.3.1</b><br>
 <img src="mrobot/s9.png">
 </p>
 
@@ -107,17 +107,21 @@ At last use a tool and got <br>version<b>4.3.1</b><br>
 <br>2. Find out various vulnerability and their status through nmap. 
 <br>Sol<br>
 <p>
-	<a href="metspt2/nmap_vul.txt">vulnerability</a><br>
-	<code class="language-plaintext highlighter-rouge">PORT    SERVICE     VERSION</code><br>
+	<a href="metspt2/nmap_vul.txt">Scanning vulnerability</a><br>
+	Many of them simply exploits by bruteforcing so enum4linux used for username's<br><br><u>
+	<code class="language-plaintext highlighter-rouge">PORT    SERVICE     VERSION</code><br></u>
 	<code class="language-plaintext highlighter-rouge">21	   ftp         vsftpd 2.3.4</code><br>
+	We Simple can bruteforce cred's<br><br>
 	<code class="language-plaintext highlighter-rouge">22     ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)</code><br>
-	<code class="language-plaintext highlighter-rouge">23     telnet      Linux telnetd</code><br>
+	Similarly for ssh usersname and password login can be done by msf's ssh_login<br>
+	<code class="language-pl aintext highlighter-rouge">23     telnet      Linux telnetd</code><br>
+	Telnet, similar bruteforce login<br><br>
 	<code class="language-plaintext highlighter-rouge">25     smtp        Postfix smtpd</code><br>
 	<code class="language-plaintext highlighter-rouge">53     domain      ISC BIND 9.4.2</code><br>
 	<code class="language-plaintext highlighter-rouge">80     http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)</code><br>
 	<code class="language-plaintext highlighter-rouge">111    rpcbind     2 (RPC #100000)</code><br>
 	<code class="language-plaintext highlighter-rouge">139    netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</code><br>
-	<code class="language-plaintext highlighter-rouge">445    netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</code><br>
+	<code class="language-plaintext highlighter-rouge">445    netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)</code><br>Most famous vulnerable port simple exploits<br><br>
 	<code class="language-plaintext highlighter-rouge">512    exec        netkit-rsh rexecd</code><br>
 	<code class="language-plaintext highlighter-rouge">513    login       OpenBSD or Solaris rlogind</code><br>
 	<code class="language-plaintext highlighter-rouge">514    shell       Netkit rshd</code><br>
@@ -154,13 +158,13 @@ At last use a tool and got <br>version<b>4.3.1</b><br>
 <br>4. Find out the following vulnerabilities and exploit it.
 <ol>
 	<p>
-<li>	 Port 25 (SMTP)</li><a href="metspt2/"></a>
+<li>	 Port 25 (SMTP)</li><a href="metspt2/smtp.png">auxiliary(scanner/smtp/smtp_enum)</a>
 <li>  Port 139 (NetBios)</li><a href="metspt2/usermap.png">exploit(multi/samba/usermap_script) </a>
-<li> Port 1099 (Remote Method Invocation)</li><a href="metspt2/"></a>
-<li>  Port 2121 (Pro-FTPD)</li><a href="metspt2/"></a>
-<li>   Port 3306 (MySQL)</li><a href="metspt2/"></a>
+<li> Port 1099 (Remote Method Invocation)</li><a href="metspt2/rmi.png">exploit(multi/misc/java_rmi_server) </a>
+<li>  Port 2121 (Pro-FTPD)</li><a href="metspt2/bforce.png">Bruteforcing the element</a>
+<li>   Port 3306 (MySQL)</li><a href="metspt2/mysql.png">auxiliary(scanner/mysql/mysql_login)</a>
 <li>  Port 6667 & 6697 (UNREALIRCD)</li><a href="metspt2/unreal.png">exploit(unix/irc/unreal_ircd_3281_backdoor) </a>
-<li> Port 8180 (Apache Tomcat)</li><a href="metspt2/"></a>
+<li> Port 8180 (Apache Tomcat)</li><a href="metspt2/Apache.png">auxiliary/scanner/http/tomcat_mgr_login</a>
 
 	</p>
 </ol>
@@ -169,7 +173,13 @@ At last use a tool and got <br>version<b>4.3.1</b><br>
 
 <br>5. Perform Medium Level Cross-site scripting and SQL Injection on DVWA.
 <br>Sol<br>
-<p></p>
+<p>
+	<img src="metspt2/q1.png">
+	<img src="metspt2/q2.png">
+	<img src="metspt2/q3.png">
+	<img src="metspt2/q3a.png">
+	<img src="metspt2/q4.png">
+</p>
 <br>
 <!-- =================================================================================================
 ================================================================================================= -->
@@ -180,15 +190,22 @@ At last use a tool and got <br>version<b>4.3.1</b><br>
 <br>Sol<br>
 
 	<h3 style="color: red">Components of Network security are:</h3>
-<p><u>Firewall Security</u><br>Firewall configuration,reporting and updates. It requires continual updatesof the latest security patches.
+<p><u>Firewall Security</u><br>Firewall configuration,reporting and updates. It requires continual updatesof the latest security patches.</p><p>
 	<u>IPS</u><br>IPS system catches and drops any threatening traffic before it causes damage. IPS systems work automatically to scan network traffic and prevent known threats from entering the network.</p><p>
 	<u>IDS</u><br>IDS systems scan networks for threats, but require human interaction to read the scan results and determine a plan of action to resolve any identified threats.</p><p>
 <u>Network Access Control (NAC)</u><br>It regulates the user and their access regularly. Ensuring your networks are secure and not accessible to unauthorized users.</p><p>
 <u>Content filtering.</u><br>By blocking the spams and advertisement along with malicious content from the internet.</p><p>
 <u>Email and spam protection</u><br>Spammers have become sophisticated and now used advanced phishing schemes to collect personal and confidential material from your employee</p>
-<h3 style="color: red">Differnt  entities envolving in and network infrastructure are:</h3>
-	<u>Firewall:</u><br>It filters all the informations coming through our network LAN or internet connections and block materials that are flagged malicious or harmfull in the list firewall.</p><p>
-</p>
+
+<h3 style="color: red">Differnt  entities envolving in network infrastructure are:</h3>
+	<p><u>Hardware</u><br>Most important part of any network. We can say it backbone of network. It comprises of all physical things connected in a network.
+	</p>
+	<p><u>Software</u><br>In order for the hardware to interact within network, it needs software to issue commands ie need set of rules or instruction that is provided by software.</p>
+	<p><u>Client Devices</u><br>These are the end devices that use the networks and simply connected with each other. </p>
+	<p><u>Firewall:</u><br>Important part of Software or neteork. It filters all the informations coming through our network LAN or internet connections and block materials that are flagged malicious or harmfull in the list firewall.</p><p>
+	<p><u>Client Devices</u><br>These are the end devices that use the networks and simply connected with each other. </p>
+	<p><u>Connection Media</u><br>Apart from end devices these devices are used to store and process data. Whether to use cloud for the same. </p>
+	
 <!-- ============================================================================================= -->
 <br>2. Please talk about some of the attack and defense mechanisms for any network including devices, hardware and softwares.
 <br>Sol<br>
@@ -221,7 +238,7 @@ it occur at the network level, eg by sending huge volumes of SYN/ACC packets whi
 <br>3. We have done Stapler1 in our lectures, please make VAPT report properly for finding anonymous ftp service with its version name and also enumerate all the users along with the password for one of them. Next you have to dump the passwd file from /etc/ directory.
 <br>Sol<br>
 <p><a href="q3/VAPT_Stapler.docx">VAPT Report on stapler</a></p>
-<p><a href="https://mrhsharma.github.io/web/Stapler">Full Walkthrough</a></p>
+<p><a href="https://mrhsharma.github.io/web/Stapler/index.html">Full Walkthrough</a></p>
 
 <!-- ============================================================================================= -->
 
